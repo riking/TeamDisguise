@@ -21,7 +21,7 @@ public class TeamDisguise extends JavaPlugin {
         getCommand("yellow").setExecutor(this);
     }
 
-    public static final String redBlob, redSig, grnBlob, grnSig, yloBlob, yloSig, bluBlob, bluSig;
+    private static final String redBlob, redSig, grnBlob, grnSig, yloBlob, yloSig, bluBlob, bluSig;
 
     static {
         redBlob = "eyJ0aW1lc3RhbXAiOjE0MDE5Mzk3MTE3MTMsInByb2ZpbGVJZCI6IjFlMzJjMzg0YjE4ZjRjMmI4NTZiNThiNmI2YzE0MzVjIiwicHJvZmlsZU5hbWUiOiJPaW5uZXJib25lIiwiaXNQdWJsaWMiOnRydWUsInRleHR1cmVzIjp7IlNLSU4iOnsidXJsIjoiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS9iMDRhZmQ0OWNmMTM0ZjM5ZTI4MmZmNzI5MDFiZDkxMzk2OWZkMDgyNDk0ZWI4YjdmZWY5MjFkYWNkMTgifX19";
@@ -37,7 +37,7 @@ public class TeamDisguise extends JavaPlugin {
         bluSig = "YSyh9LmFrG9HtTiBNJExYDRcsdQO1GsBpEBKNH5zWcU3wnYw4QqVpYi18IYAyNqSyEvH8+wGKTYNFKmq3yNmwfe+OlvfmxgCpHNmBVIifZAPHdIe05Dy+l0tYrZ+xa8bKFGAtImJHbXVw+IIgf+S+yaOSneMsH7LZXRJNAg82QtKBAKS6NFAMxcpx1wKOkllZafF0VMqB1UmPnNrtQZC4eVwtSwLGESKWdMvArsW4QqfT44yrp5sR55UNJpNWlHnnhA3EPllxorIYyafCswOp9tisS2vSes072LAVGROUUChNAWIMwTk4TxoEw8JwyypwMQq01RWOhCheRHXpGY3OoljjFXjJHCIWkAMhcqNublyZVNDIB0Q6ZQis50Y1zn6ZZ6wZphnCiFp1rN5UuZOEtTmJ/AnaWdCqgovGEoJvUJgN5ZiIj229I0jhPft9r3gtHRwzvEcRTkUub8CuvhvTQFMCY0P5xHTbabYyb34PNJ/wE4kaWZ2qKh2WsxCQMnZSF1L8Aayg+n6pz9kGjNamz00FWv5EsraQy3cWxsw6dGEiUlnx69bN9FQupdpeiKp4i+svCc8cS/YrYtBfJcexqThW3xFcpKLf5U/NWFoyh27eosPQSrv5qavuV4vEUeEDSNDVDp1HWUOVACsbE87v+p/GiC/edS5Zk5UHgmu8O4=";
     }
 
-    public static GameProfile makeGameProfile(Player player, String blob, String signature) {
+    private static GameProfile makeGameProfile(Player player, String blob, String signature) {
         GameProfile profile = new GameProfile(player.getUniqueId(), player.getName());
         profile.getProperties().put("textures", new Property("textures", blob, signature));
         return profile;
