@@ -20,19 +20,14 @@ public class Commands implements TabExecutor {
         String cmd = command.getName().toLowerCase();
         Player player = (Player) sender;
 
-        ChatColor color;
         GameProfile handle;
         if (cmd.equals("red")) {
-            color = ChatColor.RED;
             handle = makeGameProfile(player, redBlob, redSig);
         } else if (cmd.equals("green")) {
-            color = ChatColor.GREEN;
             handle = makeGameProfile(player, grnBlob, grnSig);
         } else if (cmd.equals("yellow")) {
-            color = ChatColor.YELLOW;
             handle = makeGameProfile(player, yloBlob, yloSig);
         } else if (cmd.equals("blue")) {
-            color = ChatColor.BLUE;
             handle = makeGameProfile(player, bluBlob, bluSig);
         } else {
             return false;
