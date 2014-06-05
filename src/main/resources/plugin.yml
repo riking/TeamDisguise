@@ -3,7 +3,7 @@ name: TeamDisguise
 main: org.riking.mc.teamdisguise.TeamDisguise
 version: 1.0
 
-depends: [LibsDisguises, ProtocolLib]
+depend: [LibsDisguises, ProtocolLib]
 
 commands:
   red:

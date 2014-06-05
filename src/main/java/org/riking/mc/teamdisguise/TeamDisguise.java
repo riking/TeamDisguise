@@ -1,31 +1,25 @@
 package org.riking.mc.teamdisguise;
 
-import com.comphenix.protocol.wrappers.WrappedGameProfile;
-import me.libraryaddict.disguise.DisguiseAPI;
-import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
 import net.minecraft.util.com.mojang.authlib.GameProfile;
 import net.minecraft.util.com.mojang.authlib.properties.Property;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.List;
-import java.util.UUID;
 
 public class TeamDisguise extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        getCommand("red").setExecutor(this);
-        getCommand("blue").setExecutor(this);
-        getCommand("green").setExecutor(this);
-        getCommand("yellow").setExecutor(this);
+        Commands commands = new Commands();
+        getCommand("red").setExecutor(commands);
+        getCommand("blue").setExecutor(commands);
+        getCommand("green").setExecutor(commands);
+        getCommand("yellow").setExecutor(commands);
         getServer().getPluginManager().registerEvents(this, this);
     }
 
-    private static final String redBlob, redSig, grnBlob, grnSig, yloBlob, yloSig, bluBlob, bluSig;
+    public static final String redBlob, redSig, grnBlob, grnSig, yloBlob, yloSig, bluBlob, bluSig;
 
     static {
         redBlob = "eyJ0aW1lc3RhbXAiOjE0MDE5Mzk3MTE3MTMsInByb2ZpbGVJZCI6IjFlMzJjMzg0YjE4ZjRjMmI4NTZiNThiNmI2YzE0MzVjIiwicHJvZmlsZU5hbWUiOiJPaW5uZXJib25lIiwiaXNQdWJsaWMiOnRydWUsInRleHR1cmVzIjp7IlNLSU4iOnsidXJsIjoiaHR0cDovL3RleHR1cmVzLm1pbmVjcmFmdC5uZXQvdGV4dHVyZS9iMDRhZmQ0OWNmMTM0ZjM5ZTI4MmZmNzI5MDFiZDkxMzk2OWZkMDgyNDk0ZWI4YjdmZWY5MjFkYWNkMTgifX19";
@@ -41,37 +35,9 @@ public class TeamDisguise extends JavaPlugin implements Listener {
         bluSig = "YSyh9LmFrG9HtTiBNJExYDRcsdQO1GsBpEBKNH5zWcU3wnYw4QqVpYi18IYAyNqSyEvH8+wGKTYNFKmq3yNmwfe+OlvfmxgCpHNmBVIifZAPHdIe05Dy+l0tYrZ+xa8bKFGAtImJHbXVw+IIgf+S+yaOSneMsH7LZXRJNAg82QtKBAKS6NFAMxcpx1wKOkllZafF0VMqB1UmPnNrtQZC4eVwtSwLGESKWdMvArsW4QqfT44yrp5sR55UNJpNWlHnnhA3EPllxorIYyafCswOp9tisS2vSes072LAVGROUUChNAWIMwTk4TxoEw8JwyypwMQq01RWOhCheRHXpGY3OoljjFXjJHCIWkAMhcqNublyZVNDIB0Q6ZQis50Y1zn6ZZ6wZphnCiFp1rN5UuZOEtTmJ/AnaWdCqgovGEoJvUJgN5ZiIj229I0jhPft9r3gtHRwzvEcRTkUub8CuvhvTQFMCY0P5xHTbabYyb34PNJ/wE4kaWZ2qKh2WsxCQMnZSF1L8Aayg+n6pz9kGjNamz00FWv5EsraQy3cWxsw6dGEiUlnx69bN9FQupdpeiKp4i+svCc8cS/YrYtBfJcexqThW3xFcpKLf5U/NWFoyh27eosPQSrv5qavuV4vEUeEDSNDVDp1HWUOVACsbE87v+p/GiC/edS5Zk5UHgmu8O4=";
     }
 
-    private static GameProfile makeGameProfile(Player player, String blob, String signature) {
+    public static GameProfile makeGameProfile(Player player, String blob, String signature) {
         GameProfile profile = new GameProfile(player.getUniqueId(), player.getName());
         profile.getProperties().put("textures", new Property("textures", blob, signature));
         return profile;
-    }
-
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        String cmd = command.getName().toLowerCase();
-        Player player = (Player) sender;
-
-        PlayerDisguise disguise = new PlayerDisguise(player.getName());
-        if (cmd.equals("red")) {
-            disguise.setGameProfile(WrappedGameProfile.fromHandle(makeGameProfile(player, redBlob, redSig)));
-        } else if (cmd.equals("green")) {
-            disguise.setGameProfile(WrappedGameProfile.fromHandle(makeGameProfile(player, grnBlob, grnSig)));
-        } else if (cmd.equals("yellow")) {
-            disguise.setGameProfile(WrappedGameProfile.fromHandle(makeGameProfile(player, yloBlob, yloSig)));
-        } else if (cmd.equals("blue")) {
-            disguise.setGameProfile(WrappedGameProfile.fromHandle(makeGameProfile(player, bluBlob, bluSig)));
-        } else {
-            return false;
-        }
-
-        DisguiseAPI.disguiseToAll(player, disguise);
-
-        return true;
-    }
-
-    @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
-        return super.onTabComplete(sender, command, alias, args);
     }
 }
