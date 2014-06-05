@@ -62,7 +62,7 @@ public class TeamDisguise extends JavaPlugin {
         }
 
         PlayerDisguise disguise = new PlayerDisguise(player.getName());
-        disguise.setGameProfileRaw(WrappedGameProfile.fromHandle(handle));
+        disguise.setGameProfile(WrappedGameProfile.fromHandle(handle));
 
         DisguiseAPI.disguiseToAll(player, disguise);
 
