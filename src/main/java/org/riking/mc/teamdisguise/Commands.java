@@ -41,18 +41,7 @@ public class Commands implements TabExecutor {
         }
 
         PlayerDisguise disguise = new PlayerDisguise(color.toString() + player.getName());
-        try {
-            Field gameProfile = PlayerDisguise.class.getDeclaredField("gameProfile");
-            gameProfile.setAccessible(true);
-            gameProfile.set(disguise, WrappedGameProfile.fromHandle(handle));
-            Field skinToUse = PlayerDisguise.class.getDeclaredField("skinToUse");
-            skinToUse.setAccessible(true);
-            skinToUse.set(disguise, "Notch");
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        }
+        disguise.setGameProfileRaw(WrappedGameProfile.fromHandle(handle));
 
         DisguiseAPI.disguiseToAll(player, disguise);
 
