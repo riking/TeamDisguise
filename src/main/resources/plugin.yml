@@ -1,0 +1,16 @@
+
+name: TeamDisguise
+main: org.riking.mc.teamdisguise.TeamDisguise
+version: 1.0
+
+depends: [LibsDisguises, ProtocolLib]
+
+commands:
+  red:
+    description: Join the red team
+  blue:
+    description: Join the blue team
+  green:
+    description: Join the green team
+  yellow:
+    description: Join the yellow team
