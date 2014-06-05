@@ -9,3 +9,5 @@ Guess how you get the red and blue skins.
 ---
 
 If you want to add new skins to this, see the file `get_blob_and_sig.lua`.
+
+The existing skins used in the plugin can be seen here: https://gist.github.com/riking/0561d308e287b3ef9835

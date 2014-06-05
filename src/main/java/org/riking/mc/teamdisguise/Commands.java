@@ -3,7 +3,6 @@ package org.riking.mc.teamdisguise;
 import com.comphenix.protocol.wrappers.WrappedGameProfile;
 import me.libraryaddict.disguise.DisguiseAPI;
 import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
-import me.libraryaddict.disguise.utilities.DisguiseUtilities;
 import net.minecraft.util.com.mojang.authlib.GameProfile;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -11,7 +10,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
 import static org.riking.mc.teamdisguise.TeamDisguise.*;
@@ -40,7 +38,7 @@ public class Commands implements TabExecutor {
             return false;
         }
 
-        PlayerDisguise disguise = new PlayerDisguise(color.toString() + player.getName());
+        PlayerDisguise disguise = new PlayerDisguise(player.getName());
         disguise.setGameProfileRaw(WrappedGameProfile.fromHandle(handle));
 
         DisguiseAPI.disguiseToAll(player, disguise);
