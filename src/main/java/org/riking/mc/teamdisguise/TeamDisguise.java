@@ -1,8 +1,13 @@
 package org.riking.mc.teamdisguise;
 
+import com.comphenix.protocol.wrappers.WrappedGameProfile;
+import me.libraryaddict.disguise.DisguiseAPI;
+import me.libraryaddict.disguise.disguisetypes.PlayerDisguise;
 import net.minecraft.util.com.mojang.authlib.GameProfile;
 import net.minecraft.util.com.mojang.authlib.properties.Property;
 
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -10,11 +15,10 @@ public class TeamDisguise extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        Commands commands = new Commands();
-        getCommand("red").setExecutor(commands);
-        getCommand("blue").setExecutor(commands);
-        getCommand("green").setExecutor(commands);
-        getCommand("yellow").setExecutor(commands);
+        getCommand("red").setExecutor(this);
+        getCommand("blue").setExecutor(this);
+        getCommand("green").setExecutor(this);
+        getCommand("yellow").setExecutor(this);
     }
 
     public static final String redBlob, redSig, grnBlob, grnSig, yloBlob, yloSig, bluBlob, bluSig;
@@ -37,5 +41,31 @@ public class TeamDisguise extends JavaPlugin {
         GameProfile profile = new GameProfile(player.getUniqueId(), player.getName());
         profile.getProperties().put("textures", new Property("textures", blob, signature));
         return profile;
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        String cmd = command.getName().toLowerCase();
+        Player player = (Player) sender;
+
+        GameProfile handle;
+        if (cmd.equals("red")) {
+            handle = makeGameProfile(player, redBlob, redSig);
+        } else if (cmd.equals("green")) {
+            handle = makeGameProfile(player, grnBlob, grnSig);
+        } else if (cmd.equals("yellow")) {
+            handle = makeGameProfile(player, yloBlob, yloSig);
+        } else if (cmd.equals("blue")) {
+            handle = makeGameProfile(player, bluBlob, bluSig);
+        } else {
+            return false;
+        }
+
+        PlayerDisguise disguise = new PlayerDisguise(player.getName());
+        disguise.setGameProfileRaw(WrappedGameProfile.fromHandle(handle));
+
+        DisguiseAPI.disguiseToAll(player, disguise);
+
+        return true;
     }
 }
